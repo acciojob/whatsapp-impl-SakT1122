@@ -53,13 +53,13 @@ public class WhatsappRepository {
         return g;
     }
 
+
     public int createMessage(String content){
         // The 'i^th' created message has message id 'i'.
         // Return the message id.
-        messageId++;
-        String mid=""+messageId;
-        //Message m=new Message(messageId,content);
-        return messageId;
+        this.messageId++;
+        Message message = new Message(messageId, content, new Date());
+        return this.messageId;
     }
 
     public int sendMessage(Message message, User sender, Group group) throws Exception{
@@ -70,7 +70,7 @@ public class WhatsappRepository {
         if(groupUserMap.containsKey(group) && !groupUserMap.get(group).contains(sender)){
             throw new Exception("You are not allowed to send message");
         }
-        if(!groupMessageMap.containsKey(group)){
+        /*if(!groupMessageMap.containsKey(group)){
             List<Message> n=new ArrayList<Message>();
             n.add(message);
             groupMessageMap.put(group,n);
@@ -78,7 +78,15 @@ public class WhatsappRepository {
         }
         groupMessageMap.get(group).add(message);
         //groupMessageMap.put(group,n);
-        return groupMessageMap.get(group).size();
+        return groupMessageMap.get(group).size();/*
+
+         */
+        List<Message> messages = new ArrayList<>();
+        if(groupMessageMap.containsKey(group)) messages = groupMessageMap.get(group);
+
+        messages.add(message);
+        groupMessageMap.put(group, messages);
+        return messages.size();
 
     }
 
