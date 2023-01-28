@@ -10,6 +10,14 @@ public class Group {
         this.numberOfParticipants=NumberOfParticipants;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setNumberOfParticipants(int numberOfParticipants) {
+        this.numberOfParticipants = numberOfParticipants;
+    }
+
     public int getNumberOfParticipants() {
         return numberOfParticipants;
     }
